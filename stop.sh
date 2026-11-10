@@ -9,9 +9,9 @@ if [ $# -ne 0 ]; then
 fi
 
 echo '<0>modprobe (no-kmod-autoload): restoring automatic module loading' > /dev/kmsg
-if sysctl --quiet --write "$(</run/no-kmod-autoload-state)"; then
-  	rm /run/no-kmod-autoload-state
+if sysctl --quiet --write kernel.autoload="$(</run/no-kmod-autoload-previous-cmd)"; then
+	rm /run/no-kmod-autoload-previous-cmd
 else
-  echo '<0>modprobe (no-kmod-autoload): failed to restore automatic module loading' > /dev/kmsg
+	echo '<0>modprobe (no-kmod-autoload): failed to restore automatic module loading' > /dev/kmsg
 fi
 

@@ -1,0 +1,4 @@
+# use this if you only want to log what's loaded
+#MODPROBE=modprobe-permissive
+# use this if you want to prevent module load and log
+MODPROBE=modprobe

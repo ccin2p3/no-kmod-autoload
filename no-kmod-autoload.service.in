@@ -8,7 +8,9 @@ Description=Disable automatic module loading after boot finished
 # systemd waits for oneshot, use simple so that the unit isn't waiting for itself
 Type=simple
 RemainAfterExit=yes
-ExecStart=@libexecdir@/no-kmod-autoload/start.sh @libexecdir@/no-kmod-autoload/modprobe.sh
+Environment="MODPROBE=modprobe"
+EnvironmentFile=/etc/sysconfig/no-kmod-autoload
+ExecStart=@libexecdir@/no-kmod-autoload/start.sh @libexecdir@/no-kmod-autoload/${MODPROBE}.sh
 ExecStopPost=@libexecdir@/no-kmod-autoload/stop.sh
 
 [Install]
